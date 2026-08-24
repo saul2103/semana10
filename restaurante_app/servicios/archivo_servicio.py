@@ -1,13 +1,14 @@
 import json
 import os
 from typing import List, Dict, Any, Optional, Callable
-from restaurante_app.modelos.producto import Producto
-from restaurante_app.modelos.usuario import Usuario
+from modelos.producto import Producto
+from modelos.usuario import Usuario
 
 class ArchivoServicio:
-    RUTA_JSON: str = "datos/productos.json"
-
     def __init__(self) -> None:
+        # Construir la ruta a datos dentro de restaurante_app
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.RUTA_JSON = os.path.join(base_dir, "datos", "productos.json")
         self._crear_directorio()
 
     def _crear_directorio(self) -> None:

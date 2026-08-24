@@ -1,5 +1,5 @@
 from typing import List, Optional
-from restaurante_app.modelos.producto import Producto
+from modelos.producto import Producto
 
 class Restaurante:
     def __init__(self) -> None:

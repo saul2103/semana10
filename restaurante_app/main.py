@@ -1,10 +1,6 @@
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from restaurante_app.modelos.producto import Producto
-from restaurante_app.servicios.archivo_servicio import ArchivoServicio
-from restaurante_app.servicios.restaurante import Restaurante
+from modelos.producto import Producto
+from servicios.archivo_servicio import ArchivoServicio
+from servicios.restaurante import Restaurante
 
 
 def mostrar_menu() -> None:
@@ -35,14 +31,14 @@ def registrar_producto(restaurante: Restaurante, archivo_servicio: ArchivoServic
         
         producto = Producto(nombre, precio, categoria, stock)
         if restaurante.registrar_producto(producto):
-            print(f"✓ Producto '{nombre}' registrado exitosamente.")
+            print(f"Producto '{nombre}' registrado exitosamente.")
             archivo_servicio.guardar_productos(restaurante.obtener_productos())
         else:
-            print(f"✗ El producto '{nombre}' ya existe.")
+            print(f"El producto '{nombre}' ya existe.")
     except ValueError as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
     except Exception as e:
-        print(f"✗ Error inesperado: {e}")
+        print(f"Error inesperado: {e}")
 
 
 def buscar_producto(restaurante: Restaurante) -> None:
@@ -50,9 +46,9 @@ def buscar_producto(restaurante: Restaurante) -> None:
     nombre = input("Nombre del producto a buscar: ").strip()
     producto = restaurante.buscar_producto(nombre)
     if producto:
-        print(f"✓ {producto}")
+        print(f"{producto}")
     else:
-        print(f"✗ Producto '{nombre}' no encontrado.")
+        print(f"Producto '{nombre}' no encontrado.")
 
 
 def actualizar_producto(restaurante: Restaurante, archivo_servicio: ArchivoServicio) -> None:
@@ -60,7 +56,7 @@ def actualizar_producto(restaurante: Restaurante, archivo_servicio: ArchivoServi
     nombre = input("Nombre del producto a actualizar: ").strip()
     producto = restaurante.buscar_producto(nombre)
     if not producto:
-        print(f"✗ Producto '{nombre}' no encontrado.")
+        print(f"Producto '{nombre}' no encontrado.")
         return
 
     try:
@@ -76,27 +72,27 @@ def actualizar_producto(restaurante: Restaurante, archivo_servicio: ArchivoServi
             nueva_categoria if nueva_categoria else None,
             int(nuevo_stock) if nuevo_stock else None
         )
-        print(f"✓ Producto '{nombre}' actualizado exitosamente.")
+        print(f"Producto '{nombre}' actualizado exitosamente.")
         archivo_servicio.guardar_productos(restaurante.obtener_productos())
     except ValueError as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
 
 
 def eliminar_producto(restaurante: Restaurante, archivo_servicio: ArchivoServicio) -> None:
     """Eliminar un producto"""
     nombre = input("Nombre del producto a eliminar: ").strip()
     if restaurante.eliminar_producto(nombre):
-        print(f"✓ Producto '{nombre}' eliminado exitosamente.")
+        print(f"Producto '{nombre}' eliminado exitosamente.")
         archivo_servicio.guardar_productos(restaurante.obtener_productos())
     else:
-        print(f"✗ Producto '{nombre}' no encontrado.")
+        print(f"Producto '{nombre}' no encontrado.")
 
 
 def listar_productos(restaurante: Restaurante) -> None:
     """Listar todos los productos registrados"""
     productos = restaurante.listar_productos()
     if not productos:
-        print("✗ No hay productos registrados.")
+        print("No hay productos registrados.")
         return
     
     print("\n--- LISTA DE PRODUCTOS ---")
@@ -106,19 +102,19 @@ def listar_productos(restaurante: Restaurante) -> None:
 
 def registrar_usuario() -> None:
     """Registrar un nuevo usuario"""
-    print("✗ Funcionalidad de registro de usuario (pendiente de implementación)")
+    print("Funcionalidad de registro de usuario (pendiente de implementación)")
 
 
 def listar_usuarios() -> None:
     """Listar usuarios registrados"""
-    print("✗ Funcionalidad de listado de usuarios (pendiente de implementación)")
+    print("Funcionalidad de listado de usuarios (pendiente de implementación)")
 
 
 def mostrar_categorias(restaurante: Restaurante) -> None:
     """Mostrar categorías disponibles"""
     categorias = set(p.categoria for p in restaurante.listar_productos())
     if not categorias:
-        print("✗ No hay categorías registradas.")
+        print("No hay categorías registradas.")
         return
     print("\n--- CATEGORÍAS DISPONIBLES ---")
     for categoria in sorted(categorias):
@@ -134,9 +130,9 @@ def main() -> None:
     productos_cargados = archivo_servicio.cargar_productos()
     if productos_cargados:
         restaurante.cargar_productos(productos_cargados)
-        print(f"✓ Se cargaron {len(productos_cargados)} productos desde el archivo.")
+        print(f"Se cargaron {len(productos_cargados)} productos desde el archivo.")
     else:
-        print("ℹ No se encontraron productos guardados.")
+        print("No se encontraron productos guardados.")
 
     # Menú principal
     while True:
@@ -162,18 +158,18 @@ def main() -> None:
                 mostrar_categorias(restaurante)
             elif opcion == "9":
                 archivo_servicio.guardar_productos(restaurante.obtener_productos())
-                print("✓ Saliendo del sistema...")
+                print("Saliendo del sistema...")
                 break
             else:
-                print("✗ Opción no válida. Intente nuevamente.")
+                print("Opción no válida. Intente nuevamente.")
         except ValueError:
-            print("✗ Error: Ingrese un número válido.")
+            print("Error: Ingrese un número válido.")
         except KeyboardInterrupt:
             archivo_servicio.guardar_productos(restaurante.obtener_productos())
-            print("\n✓ Sistema cerrado correctamente.")
+            print("\nSistema cerrado correctamente.")
             break
         except Exception as e:
-            print(f"✗ Error inesperado: {e}")
+            print(f"Error inesperado: {e}")
 
 
 if __name__ == "__main__":

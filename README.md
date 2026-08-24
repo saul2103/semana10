@@ -20,9 +20,9 @@ Los archivos están organizados de la siguiente manera:
 
 ```
 proyecto/
-├── main.py                          # Archivo principal donde se ejecuta el programa
 ├── README.md                        # Este archivo de documentación
 └── restaurante_app/
+    ├── main.py                      # Archivo principal donde se ejecuta el programa
     ├── __init__.py                  # Marca como paquete Python
     ├── datos/
     │   └── productos.json           # Archivo donde se guardan los productos
@@ -40,9 +40,9 @@ proyecto/
 
 ## ¿Qué hace cada archivo?
 
-### **main.py** - El menú del programa
+### **restaurante_app/main.py** - El menú del programa
 
-Este es el archivo que ejecutas cuando quieres usar el programa. Aquí se encuentra:
+Este es el archivo principal que ejecutas cuando quieres usar el programa. Aquí se encuentra:
 
 - El **menú** que ves al ejecutar la aplicación
 - Las funciones que responden a cada opción del menú
@@ -122,7 +122,7 @@ El programa no acepta cualquier información. Verifica que los datos tengan sent
 
 2. Escribe este comando:
    ```
-   python main.py
+   python restaurante_app/main.py
    ```
 
 3. Verás un menú como este:
@@ -232,12 +232,12 @@ El proyecto sigue estas buenas prácticas:
 - `Producto` solo define qué es un producto
 - `Restaurante` solo maneja la lista de productos
 - `ArchivoServicio` solo se encarga de guardar y cargar archivos
-- `main.py` solo muestra el menú y pide información al usuario
+- `restaurante_app/main.py` solo muestra el menú y pide información al usuario
 
 **Fácil de cambiar:** Si necesitas cambiar algo, solo tocas la parte relevante
 - Si cambias cómo se valida un producto, solo editas `producto.py`
 - Si cambias el formato de archivo, solo editas `archivo_servicio.py`
-- Si quieres una interfaz diferente, solo editas `main.py`
+- Si quieres una interfaz diferente, solo editas `restaurante_app/main.py`
 
 **Reutilizable:** Puedes agregar nuevas clases sin romper las existentes
 - Agregar una clase `Usuario` completa sin tocar el código de productos
